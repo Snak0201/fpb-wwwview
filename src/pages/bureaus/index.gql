@@ -1,0 +1,10 @@
+query GetBureaus {
+  bureaus {
+    ...bureaus
+  }
+}
+
+fragment bureaus on Bureau {
+  id
+  name
+}
