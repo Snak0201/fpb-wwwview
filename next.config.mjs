@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin"
+
+const withVanillaExtract = createVanillaExtractPlugin()
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -6,9 +11,9 @@ const nextConfig = {
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
-    };
-    return config;
+    }
+    return config
   },
-};
+}
 
-module.exports = nextConfig;
+export default withVanillaExtract(nextConfig)

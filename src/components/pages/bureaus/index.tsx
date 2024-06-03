@@ -7,7 +7,7 @@ export const BureausPageComponent = () => {
 
   return (
     <>
-      <header className="green">ほしのなか政府</header>
+      <header className={bureausStyle.header}>ほしのなか政府</header>
       {bureaus.map((bureau, i) => (
         <div key={i}>{bureau.name}</div>
       ))}
