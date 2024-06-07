@@ -1,6 +1,8 @@
+import { aboutPageStyles } from "./style.css"
+
 export const AboutPageComponent = () => {
   return (
-    <div className="container">
+    <div className={aboutPageStyles.container}>
       <h1>ほしのなか政府について</h1>
       <h2>はじめに</h2>
       <p>
