@@ -1,6 +1,6 @@
 export const AboutPageComponent = () => {
   return (
-    <>
+    <div className="container">
       <h1>ほしのなか政府について</h1>
       <h2>はじめに</h2>
       <p>
@@ -31,12 +31,12 @@ export const AboutPageComponent = () => {
         を利用してデプロイされています。
         <a href="https://github.com/Snak0201/fpb-wwwsite">GitHub</a>
         にてコード・バージョン管理が行われています。
-        最新バージョン・リリースノートは{" "}
+        最新バージョン・リリースノートは
         <a href="https://github.com/Snak0201/fpb-wwwsite/releases">
           GitHub Releases
         </a>
         から確認できます。
       </p>
-    </>
+    </div>
   )
 }
