@@ -42,5 +42,10 @@ export const styles = {
         width: "160px",
       },
     },
+    verticalAlign: "bottom",
+  }),
+
+  logoLink: style({
+    textDecoration: "none",
   }),
 }

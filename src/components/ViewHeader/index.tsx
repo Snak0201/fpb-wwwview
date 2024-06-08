@@ -1,5 +1,6 @@
 import { styles } from "@/components/ViewHeader/style.css"
 import Image from "next/image"
+import Link from "next/link"
 
 interface NavLink {
   href: string
@@ -18,13 +19,15 @@ export const ViewHeader = () => {
 
   return (
     <nav className={styles.nav}>
-      <Image
-        src="/images/logo.png"
-        alt="ロゴ画像"
-        width="200"
-        height="70"
-        className={styles.logo}
-      />
+      <Link href="/" className={styles.logoLink}>
+        <Image
+          src="/images/logo.png"
+          alt="ロゴ画像"
+          width="200"
+          height="70"
+          className={styles.logo}
+        />
+      </Link>
       <span className={styles.links}>
         {navLinks.map((link, index) => {
           return (
