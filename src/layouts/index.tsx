@@ -1,4 +1,6 @@
+import { ViewFooter } from "@/components/ViewFooter"
 import { ViewHeader } from "@/components/ViewHeader"
+import { styles } from "@/layouts/style.css"
 import Head from "next/head"
 import { ReactNode } from "react"
 
@@ -16,11 +18,15 @@ export const ViewLayout = ({ title, children }: Props) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <header>
-        <ViewHeader />
-      </header>
-      <main>{children}</main>
-      <footer>ここがfooter</footer>
+      <div className={styles.viewUpperContent}>
+        <header>
+          <ViewHeader />
+        </header>
+        <main>{children}</main>
+      </div>
+      <footer>
+        <ViewFooter />
+      </footer>
     </>
   )
 }
