@@ -18,7 +18,13 @@ export const ViewHeader = () => {
 
   return (
     <nav className={styles.nav}>
-      <Image src="/images/logo.png" alt="ロゴ画像" width="200" height="70" />
+      <Image
+        src="/images/logo.png"
+        alt="ロゴ画像"
+        width="200"
+        height="70"
+        className={styles.logo}
+      />
       <span className={styles.links}>
         {navLinks.map((link, index) => {
           return (

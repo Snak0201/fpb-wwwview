@@ -3,11 +3,15 @@ import { style } from "@vanilla-extract/css"
 
 export const styles = {
   nav: style({
+    display: "flex",
+    alignItems: "center",
     height: "70px",
     backgroundColor: "aquamarine",
+    "@media": { [mediaQuery.sp]: { height: "56px" } },
   }),
 
   links: style({
+    marginLeft: "30px",
     "@media": {
       [mediaQuery.sp]: {
         display: "none",
@@ -16,7 +20,7 @@ export const styles = {
   }),
 
   link: style({
-    margin: "10px",
+    margin: "15px",
     textDecoration: "none",
   }),
 
@@ -25,7 +29,17 @@ export const styles = {
 
     "@media": {
       [mediaQuery.sp]: {
+        marginLeft: "15px",
         display: "inline-block",
+      },
+    },
+  }),
+
+  logo: style({
+    "@media": {
+      [mediaQuery.sp]: {
+        height: "56px",
+        width: "160px",
       },
     },
   }),
