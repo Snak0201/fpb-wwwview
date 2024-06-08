@@ -17,15 +17,20 @@ export const ViewHeader = () => {
   ]
 
   return (
-    <div className={styles.links}>
+    <nav className={styles.nav}>
       <Image src="/images/logo.png" alt="ロゴ画像" width="200" height="70" />
-      {navLinks.map((link, index) => {
-        return (
-          <a key={index} href={link.href} className={styles.link}>
-            {link.text}
-          </a>
-        )
-      })}
-    </div>
+      <span className={styles.links}>
+        {navLinks.map((link, index) => {
+          return (
+            <a key={index} href={link.href} className={styles.link}>
+              {link.text}
+            </a>
+          )
+        })}
+      </span>
+      <span className={`${styles.link} ${styles.sitemap}`}>
+        <a href="links">サイトマップ</a>
+      </span>
+    </nav>
   )
 }
