@@ -1,5 +1,7 @@
 import { ViewContainer } from "@/components/ViewContainer"
+import { styles } from "@/components/pages/about/styles.css"
 import { ViewLayout } from "@/layouts"
+import Image from "next/image"
 
 export const AboutPageComponent = () => {
   return (
@@ -41,6 +43,15 @@ export const AboutPageComponent = () => {
           </a>
           から確認できます。
         </p>
+        <h2>ほしのなか政府のロゴ画像</h2>
+        <p>ほしのなか政府のロゴ画像はこちらです。</p>
+        <Image
+          src="/images/logo.png"
+          alt="ロゴ画像"
+          width="600"
+          height="210"
+          className={styles.logo}
+        />
       </ViewContainer>
     </ViewLayout>
   )
