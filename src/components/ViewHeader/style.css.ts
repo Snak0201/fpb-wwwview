@@ -22,6 +22,7 @@ export const styles = {
 
   sitemap: style({
     display: "none",
+
     "@media": {
       [mediaQuery.sp]: {
         display: "inline-block",

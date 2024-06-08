@@ -28,8 +28,10 @@ export const ViewHeader = () => {
           )
         })}
       </span>
-      <span className={`${styles.link} ${styles.sitemap}`}>
-        <a href="links">サイトマップ</a>
+      <span className={styles.sitemap}>
+        <a href="links" className={styles.link}>
+          サイトマップ
+        </a>
       </span>
     </nav>
   )
