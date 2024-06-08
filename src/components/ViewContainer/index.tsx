@@ -1,5 +1,5 @@
+import { styles } from "@/components/ViewContainer/style.css"
 import { ReactNode } from "react"
-import { ViewContainerStyles } from "./style.css"
 
 interface Props {
   children: ReactNode
@@ -9,5 +9,5 @@ interface Props {
  * 画面サイズの制御コンポーネント
  */
 export const ViewContainer = ({ children }: Props) => {
-  return <div className={ViewContainerStyles.container}>{children}</div>
+  return <div className={styles.container}>{children}</div>
 }

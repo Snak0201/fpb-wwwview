@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css"
 
-export const bureausStyle = {
+export const styles = {
   header: style({
     backgroundColor: "green",
   }),

@@ -1,7 +1,7 @@
 import { mediaQuery } from "@/constants/mediaQuery"
 import { style } from "@vanilla-extract/css"
 
-export const ViewContainerStyles = {
+export const styles = {
   container: style({
     maxWidth: "1024px",
     margin: "0 auto",
