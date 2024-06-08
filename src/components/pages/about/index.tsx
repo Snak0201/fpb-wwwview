@@ -1,8 +1,8 @@
-import { aboutPageStyles } from "./style.css"
+import { ViewContainer } from "@/components/ViewContainer"
 
 export const AboutPageComponent = () => {
   return (
-    <div className={aboutPageStyles.container}>
+    <ViewContainer>
       <h1>ほしのなか政府について</h1>
       <h2>はじめに</h2>
       <p>
@@ -39,6 +39,6 @@ export const AboutPageComponent = () => {
         </a>
         から確認できます。
       </p>
-    </div>
+    </ViewContainer>
   )
 }
