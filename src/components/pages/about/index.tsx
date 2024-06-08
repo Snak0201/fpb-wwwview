@@ -3,7 +3,7 @@ import { ViewLayout } from "@/layouts"
 
 export const AboutPageComponent = () => {
   return (
-    <ViewLayout>
+    <ViewLayout title="ほしのなか政府について">
       <ViewContainer>
         <h1>ほしのなか政府について</h1>
         <h2>はじめに</h2>
