@@ -1,0 +1,10 @@
+fragment ArticleBase on ArticleConnection {
+  nodes {
+    id
+    title
+  }
+  pageInfo {
+    endCursor
+    hasNextPage
+  }
+}

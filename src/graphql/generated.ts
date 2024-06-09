@@ -117,10 +117,15 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type GetArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+export type ArticleBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+
+export type GetArticlesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+}>;
 
 
-export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string } | null> | null } | null };
+export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -129,6 +134,18 @@ export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typena
 
 export type BureausFragment = { __typename?: 'Bureau', id: string, name: string };
 
+export const ArticleBaseFragmentDoc = gql`
+    fragment ArticleBase on ArticleConnection {
+  nodes {
+    id
+    title
+  }
+  pageInfo {
+    endCursor
+    hasNextPage
+  }
+}
+    `;
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
@@ -136,14 +153,12 @@ export const BureausFragmentDoc = gql`
 }
     `;
 export const GetArticlesDocument = gql`
-    query GetArticles {
-  articles {
-    nodes {
-      id
-    }
+    query GetArticles($first: Int = 10, $after: String) {
+  articles(first: $first, after: $after) {
+    ...ArticleBase
   }
 }
-    `;
+    ${ArticleBaseFragmentDoc}`;
 
 export function useGetArticlesQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetArticlesQuery, GetArticlesQueryVariables>({ query: GetArticlesDocument, ...options });
