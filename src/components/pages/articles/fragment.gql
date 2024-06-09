@@ -1,4 +1,4 @@
-fragment ArticleBase on ArticleConnection {
+fragment ArticlesBase on ArticleConnection {
   nodes {
     id
     title

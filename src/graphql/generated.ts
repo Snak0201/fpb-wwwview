@@ -117,7 +117,7 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type ArticleBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+export type ArticlesBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
 export type GetArticlesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -134,8 +134,8 @@ export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typena
 
 export type BureausFragment = { __typename?: 'Bureau', id: string, name: string };
 
-export const ArticleBaseFragmentDoc = gql`
-    fragment ArticleBase on ArticleConnection {
+export const ArticlesBaseFragmentDoc = gql`
+    fragment ArticlesBase on ArticleConnection {
   nodes {
     id
     title
@@ -155,10 +155,10 @@ export const BureausFragmentDoc = gql`
 export const GetArticlesDocument = gql`
     query GetArticles($first: Int = 10, $after: String) {
   articles(first: $first, after: $after) {
-    ...ArticleBase
+    ...ArticlesBase
   }
 }
-    ${ArticleBaseFragmentDoc}`;
+    ${ArticlesBaseFragmentDoc}`;
 
 export function useGetArticlesQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetArticlesQuery, GetArticlesQueryVariables>({ query: GetArticlesDocument, ...options });

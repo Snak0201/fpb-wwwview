@@ -1,5 +1,5 @@
 query GetArticles($first: Int = 10, $after: String) {
   articles(first: $first, after: $after) {
-    ...ArticleBase
+    ...ArticlesBase
   }
 }
