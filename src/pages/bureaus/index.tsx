@@ -1,4 +1,5 @@
 import { BureausPageComponent } from "@/components/pages/bureaus"
+import { graphqlEndpoint } from "@/constants/graphql"
 import { GetBureausDocument, useGetBureausQuery } from "@/graphql/generated"
 import { bureausAtom, emptyBureaus } from "@/store/bureaus"
 import { useHydrateAtoms } from "jotai/utils"
@@ -19,7 +20,7 @@ export const getServerSideProps = (async (context) => {
   const ssrCache = ssrExchange({ isClient: false })
   const client = initUrqlClient(
     {
-      url: `https://hoshinonaka.net/graphql`,
+      url: graphqlEndpoint,
       exchanges: [cacheExchange, ssrCache, fetchExchange],
     },
     false
@@ -46,7 +47,7 @@ export const getServerSideProps = (async (context) => {
 
 export default withUrqlClient(
   (ssrExchange) => ({
-    url: "https://hoshinonaka.net/graphql",
+    url: graphqlEndpoint,
     exchanges: [cacheExchange, ssrExchange, fetchExchange],
   }),
   { ssr: false }
