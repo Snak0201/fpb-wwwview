@@ -117,6 +117,11 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
+export type GetArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string } | null> | null } | null };
+
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -130,6 +135,19 @@ export const BureausFragmentDoc = gql`
   name
 }
     `;
+export const GetArticlesDocument = gql`
+    query GetArticles {
+  articles {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+export function useGetArticlesQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetArticlesQuery, GetArticlesQueryVariables>({ query: GetArticlesDocument, ...options });
+};
 export const GetBureausDocument = gql`
     query GetBureaus {
   bureaus {
