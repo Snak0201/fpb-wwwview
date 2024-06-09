@@ -12,7 +12,15 @@ services:
       - .:/app
       - node_modules:/var/www/app/node_modules
     command: sh -c "yarn && npm run dev -- -p 3001"
-  
+    networks:
+      - wwwview
+      - wwwsite_view
+
 volumes:
   node_modules:
-  
+
+networks:
+  wwwview:
+    name: wwwview
+  wwwsite_view:
+    external: true
