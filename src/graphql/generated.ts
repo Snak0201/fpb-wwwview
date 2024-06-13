@@ -117,6 +117,8 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
+export type ArticleItemFragment = { __typename?: 'Article', id: string, title: string };
+
 export type ArticlesBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
 export type GetArticlesQueryVariables = Exact<{
@@ -127,31 +129,23 @@ export type GetArticlesQueryVariables = Exact<{
 
 export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
 
-export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typename?: 'Bureau', id: string, name: string }> | null };
-
-export type BureausFragment = { __typename?: 'Bureau', id: string, name: string };
-
+export const ArticleItemFragmentDoc = gql`
+    fragment ArticleItem on Article {
+  id
+  title
+}
+    `;
 export const ArticlesBaseFragmentDoc = gql`
     fragment ArticlesBase on ArticleConnection {
   nodes {
-    id
-    title
+    ...ArticleItem
   }
   pageInfo {
     endCursor
     hasNextPage
   }
 }
-    `;
-export const BureausFragmentDoc = gql`
-    fragment bureaus on Bureau {
-  id
-  name
-}
-    `;
+    ${ArticleItemFragmentDoc}`;
 export const GetArticlesDocument = gql`
     query GetArticles($first: Int = 10, $after: String) {
   articles(first: $first, after: $after) {
@@ -162,17 +156,6 @@ export const GetArticlesDocument = gql`
 
 export function useGetArticlesQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetArticlesQuery, GetArticlesQueryVariables>({ query: GetArticlesDocument, ...options });
-};
-export const GetBureausDocument = gql`
-    query GetBureaus {
-  bureaus {
-    ...bureaus
-  }
-}
-    ${BureausFragmentDoc}`;
-
-export function useGetBureausQuery(options?: Omit<Urql.UseQueryArgs<GetBureausQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetBureausQuery, GetBureausQueryVariables>({ query: GetBureausDocument, ...options });
 };
 import { IntrospectionQuery } from 'graphql';
 export default {

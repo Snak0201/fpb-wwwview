@@ -1,7 +1,6 @@
 fragment ArticlesBase on ArticleConnection {
   nodes {
-    id
-    title
+    ...ArticleItem
   }
   pageInfo {
     endCursor

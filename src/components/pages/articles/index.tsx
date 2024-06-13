@@ -9,10 +9,11 @@ export const ArticlesPageComponent = () => {
   return (
     <ViewLayout title="記事一覧">
       <ViewContainer>
-        {articlesBase.nodes &&
+        AR
+        {/* {articlesBase.nodes &&
           articlesBase.nodes.map((article) => {
             return <>{article?.id}</>
-          })}
+          })} */}
       </ViewContainer>
     </ViewLayout>
   )
