@@ -1,8 +1,10 @@
-type Props = {
+import { ReactNode } from "react"
+
+interface Props {
   href: string
-  text: string
+  children: ReactNode
 }
 
-export const ViewLink = ({ href, text }: Props) => {
-  return <a href={href}>{text}</a>
+export const ViewLink = ({ href, children }: Props) => {
+  return <a href={href}>{children}</a>
 }
