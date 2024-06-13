@@ -1,4 +1,4 @@
-import { mediaQuery } from "@/constants/mediaQuery"
+import { mediaQuery } from "@/utils/constants/mediaQuery"
 import { style } from "@vanilla-extract/css"
 
 export const styles = {
