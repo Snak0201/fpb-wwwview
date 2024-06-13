@@ -1,4 +1,7 @@
 fragment ArticleItem on Article {
   id
   title
+  bureaus {
+    name
+  }
 }

@@ -6,5 +6,10 @@ interface Props {
 }
 
 export const ArticleItem = ({ article }: Props) => {
-  return <div className={styles.card}>{article.title}</div>
+  return (
+    <div className={styles.card}>
+      <div className="title">{article.title}</div>
+      <div className="bureaus">{article.bureaus?.[0].name}</div>
+    </div>
+  )
 }
