@@ -6,12 +6,15 @@ import { useAtomValue } from "jotai"
 
 export const ArticlesPageComponent = () => {
   const articlesBase = useAtomValue(articlesBaseAtom)
-  const article = articlesBase.nodes?.[0]
+  const articles = articlesBase.nodes
 
   return (
     <ViewLayout title="記事一覧">
       <ViewContainer>
-        {article && <ArticleItem article={article} />}
+        {articles?.map((article) => {
+          if (!article) return
+          return <ArticleItem key={article.id} article={article} />
+        })}
       </ViewContainer>
     </ViewLayout>
   )
