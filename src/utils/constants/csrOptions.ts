@@ -1,3 +1,3 @@
 export const csrOptions = {
-  url: "http://wwwsite-app:3000/graphql",
+  url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
 }

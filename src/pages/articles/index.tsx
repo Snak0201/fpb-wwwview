@@ -20,7 +20,7 @@ export const getServerSideProps = (async (context) => {
   const ssrCache = ssrExchange({ isClient: false })
   const client = initUrqlClient(
     {
-      url: `${process.env.GRAPHQL_ENDPOINT}`,
+      url: `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`,
       exchanges: [cacheExchange, ssrCache, fetchExchange],
     },
     false
@@ -47,7 +47,7 @@ export const getServerSideProps = (async (context) => {
 
 export default withUrqlClient(
   (ssrExchange) => ({
-    url: `${process.env.GRAPHQL_ENDPOINT}`,
+    url: `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`,
     exchanges: [cacheExchange, ssrExchange, fetchExchange],
   }),
   { ssr: false }
