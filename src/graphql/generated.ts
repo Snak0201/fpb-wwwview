@@ -119,7 +119,7 @@ export type QueryBureauArgs = {
 
 export type ArticleItemFragment = { __typename?: 'Article', id: string, title: string, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
 
-export type ArticlesBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+export type ArticlesBaseFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } };
 
 export type GetArticlesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -127,7 +127,7 @@ export type GetArticlesQueryVariables = Exact<{
 }>;
 
 
-export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
+export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } } | null };
 
 export const ArticleItemFragmentDoc = gql`
     fragment ArticleItem on Article {
@@ -144,7 +144,9 @@ export const ArticlesBaseFragmentDoc = gql`
     ...ArticleItem
   }
   pageInfo {
+    startCursor
     endCursor
+    hasPreviousPage
     hasNextPage
   }
 }

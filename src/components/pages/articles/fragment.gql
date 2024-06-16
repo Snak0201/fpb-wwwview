@@ -3,7 +3,9 @@ fragment ArticlesBase on ArticleConnection {
     ...ArticleItem
   }
   pageInfo {
+    startCursor
     endCursor
+    hasPreviousPage
     hasNextPage
   }
 }

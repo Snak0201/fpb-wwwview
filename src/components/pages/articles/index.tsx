@@ -11,11 +11,14 @@ export const ArticlesPageComponent = () => {
   return (
     <ViewLayout title="記事一覧">
       <ViewContainer>
+        <h1>記事一覧</h1>
         {articles?.map((article) => {
           if (!article) return
           return <ArticleItem key={article.id} article={article} />
         })}
       </ViewContainer>
+      {articlesBase.pageInfo.hasPreviousPage && <>前へ</>}
+      {articlesBase.pageInfo.hasNextPage && <>次へ</>}
     </ViewLayout>
   )
 }
