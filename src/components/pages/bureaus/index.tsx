@@ -7,7 +7,7 @@ import { csrOptions } from "@/constants/urql"
 export const BureausPageComponent = () => {
   const bureaus = useAtomValue(bureausAtom)
 
-  const [csrBureau, csrQuery] = useGetBureauQuery()
+  const [csrBureau, csrQuery] = useGetBureauQuery({ pause: true })
 
   const getBureau = () => {
     csrQuery(csrOptions)
