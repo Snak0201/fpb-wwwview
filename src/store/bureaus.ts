@@ -5,6 +5,7 @@ export const emptyBureaus: BureausFragment[] = [
   {
     id: "",
     name: "",
+    description: "",
   },
 ]
 
