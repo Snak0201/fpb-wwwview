@@ -8,7 +8,7 @@ export const BureausPageComponent = () => {
 
   const [csrBureau, csrQuery] = useGetBureauQuery()
   const getBureau = () => {
-    csrQuery({ url: "https://hoshinonaka.net/graphql" })
+    csrQuery({ url: "http://localhost:8000/graphql" })
   }
 
   console.log(csrBureau)
