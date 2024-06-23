@@ -123,12 +123,12 @@ export type ArticleListFragment = { __typename?: 'ArticleConnection', nodes?: Ar
 
 export type ArticleListFieldFragment = { __typename?: 'Article', title: string };
 
-export type GetArticlesQueryVariables = Exact<{
+export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetArticlesQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Article', title: string } | null> | null } | null };
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Article', title: string } | null> | null } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -170,16 +170,16 @@ export const BureausFragmentDoc = gql`
   description
 }
     `;
-export const GetArticlesDocument = gql`
-    query GetArticles($first: Int = 10) {
+export const GetArticlesPageDocument = gql`
+    query GetArticlesPage($first: Int = 10) {
   articles(first: $first) {
     ...ArticlesPage
   }
 }
     ${ArticlesPageFragmentDoc}`;
 
-export function useGetArticlesQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetArticlesQuery, GetArticlesQueryVariables>({ query: GetArticlesDocument, ...options });
+export function useGetArticlesPageQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesPageQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetArticlesPageQuery, GetArticlesPageQueryVariables>({ query: GetArticlesPageDocument, ...options });
 };
 export const GetBureausDocument = gql`
     query GetBureaus {

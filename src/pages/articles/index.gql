@@ -1,4 +1,4 @@
-query GetArticles($first: Int = 10) {
+query GetArticlesPage($first: Int = 10) {
   articles(first: $first) {
     ...ArticlesPage
   }
