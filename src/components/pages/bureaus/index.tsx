@@ -1,7 +1,8 @@
 import { bureausAtom } from "@/store/bureaus"
 import { useAtomValue } from "jotai"
 import { styles } from "@/components/pages/bureaus/style.css"
-import { useGetBureauQuery, useGetBureausQuery } from "@/graphql/generated"
+import { useGetBureauQuery } from "@/graphql/generated"
+import { csrOptions } from "@/constants/urql"
 
 export const BureausPageComponent = () => {
   const bureaus = useAtomValue(bureausAtom)
@@ -9,7 +10,7 @@ export const BureausPageComponent = () => {
   const [csrBureau, csrQuery] = useGetBureauQuery()
 
   const getBureau = () => {
-    csrQuery({ url: `${process.env.NEXT_PUBLIC_WWWSITE_ROOT}graphql` })
+    csrQuery(csrOptions)
   }
 
   return (
