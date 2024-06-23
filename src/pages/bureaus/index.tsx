@@ -1,4 +1,5 @@
 import { BureausPageComponent } from "@/components/pages/bureaus"
+import { ssrClient } from "@/constants/urql"
 import { GetBureausDocument, useGetBureausQuery } from "@/graphql/generated"
 import { bureausAtom, emptyBureaus } from "@/store/bureaus"
 import { useHydrateAtoms } from "jotai/utils"
@@ -16,14 +17,7 @@ const BureausPage = () => {
 }
 
 export const getServerSideProps = (async (context) => {
-  const ssrCache = ssrExchange({ isClient: false })
-  const client = initUrqlClient(
-    {
-      url: `${process.env.NEXT_PUBLIC_WWWSITE_CONTAINER_ROOT}graphql`,
-      exchanges: [cacheExchange, ssrCache, fetchExchange],
-    },
-    false
-  )
+  const { ssrCache, client } = ssrClient()
 
   try {
     await Promise.all([client.query(GetBureausDocument, {}).toPromise()])

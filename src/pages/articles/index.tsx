@@ -1,4 +1,5 @@
 import { ArticlesPageComponent } from "@/components/pages/articles"
+import { ssrClient } from "@/constants/urql"
 import { GetServerSideProps } from "next"
 import { initUrqlClient, withUrqlClient } from "next-urql"
 import { cacheExchange, fetchExchange, ssrExchange } from "urql"
@@ -13,14 +14,15 @@ const ArticlesPage = () => {
 }
 
 export const getServerSideProps = (async (context) => {
-  const ssrCache = ssrExchange({ isClient: false })
-  const client = initUrqlClient(
-    {
-      url: `${process.env.NEXT_PUBLIC_WWWSITE_CONTAINER_ROOT}graphql`,
-      exchanges: [cacheExchange, ssrCache, fetchExchange],
-    },
-    false
-  )
+  const { ssrCache, client } = ssrClient()
+  // const ssrCache = ssrExchange({ isClient: false })
+  // const client = initUrqlClient(
+  //   {
+  //     url: `${process.env.NEXT_PUBLIC_WWWSITE_CONTAINER_ROOT}graphql`,
+  //     exchanges: [cacheExchange, ssrCache, fetchExchange],
+  //   },
+  //   false
+  // )
 
   // try {
   //   await Promise.all([client.query(GetBureausDocument, {}).toPromise()])
