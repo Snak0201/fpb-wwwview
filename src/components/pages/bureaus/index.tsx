@@ -9,10 +9,8 @@ export const BureausPageComponent = () => {
   const [csrBureau, csrQuery] = useGetBureauQuery()
 
   const getBureau = () => {
-    csrQuery({ url: `${process.env.NEXT_PUBLIC_WWWSITE_ROUTE}graphql` })
+    csrQuery({ url: `${process.env.NEXT_PUBLIC_WWWSITE_ROOT}graphql` })
   }
-
-  // console.log(csrBureau)
 
   return (
     <>
