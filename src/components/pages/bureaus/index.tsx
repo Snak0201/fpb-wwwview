@@ -7,11 +7,12 @@ export const BureausPageComponent = () => {
   const bureaus = useAtomValue(bureausAtom)
 
   const [csrBureau, csrQuery] = useGetBureauQuery()
+
   const getBureau = () => {
-    csrQuery({ url: "http://localhost:8000/graphql" })
+    csrQuery({ url: `${process.env.NEXT_PUBLIC_WWWSITE_ROUTE}graphql` })
   }
 
-  console.log(csrBureau)
+  // console.log(csrBureau)
 
   return (
     <>
