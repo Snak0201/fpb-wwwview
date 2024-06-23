@@ -1,0 +1,5 @@
+query GetArticles($first: Int = 10) {
+  articles(first: $first) {
+    ...ArticlesPage
+  }
+}

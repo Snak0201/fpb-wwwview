@@ -1,0 +1,18 @@
+fragment ArticlesPage on ArticleConnection {
+  ...ArticleList
+
+  pageInfo {
+    endCursor
+    hasNextPage
+  }
+}
+
+fragment ArticleList on ArticleConnection {
+  nodes {
+    ...ArticleListField
+  }
+}
+
+fragment ArticleListField on Article {
+  title
+}
