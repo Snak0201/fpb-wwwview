@@ -55,14 +55,15 @@ export type QueryBureauArgs = {
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typename?: 'Bureau', id: string, name: string }> | null };
+export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typename?: 'Bureau', id: string, name: string, description: string }> | null };
 
-export type BureausFragment = { __typename?: 'Bureau', id: string, name: string };
+export type BureausFragment = { __typename?: 'Bureau', id: string, name: string, description: string };
 
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
   name
+  description
 }
     `;
 export const GetBureausDocument = gql`
