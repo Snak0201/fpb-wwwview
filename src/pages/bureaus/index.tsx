@@ -19,7 +19,7 @@ export const getServerSideProps = (async (context) => {
   const ssrCache = ssrExchange({ isClient: false })
   const client = initUrqlClient(
     {
-      url: `https://hoshinonaka.net/graphql`,
+      url: `${process.env.NEXT_PUBLIC_WWWSITE_CONTAINER_ROOT}graphql`,
       exchanges: [cacheExchange, ssrCache, fetchExchange],
     },
     false
@@ -46,7 +46,7 @@ export const getServerSideProps = (async (context) => {
 
 export default withUrqlClient(
   (ssrExchange) => ({
-    url: "https://hoshinonaka.net/graphql",
+    url: `${process.env.NEXT_PUBLIC_WWWSITE_CONTAINER_ROOT}graphql`,
     exchanges: [cacheExchange, ssrExchange, fetchExchange],
   }),
   { ssr: false }

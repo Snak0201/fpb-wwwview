@@ -55,14 +55,20 @@ export type QueryBureauArgs = {
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typename?: 'Bureau', id: string, name: string }> | null };
+export type GetBureausQuery = { __typename?: 'Query', bureaus?: Array<{ __typename?: 'Bureau', id: string, name: string, description: string }> | null };
 
-export type BureausFragment = { __typename?: 'Bureau', id: string, name: string };
+export type BureausFragment = { __typename?: 'Bureau', id: string, name: string, description: string };
+
+export type GetBureauQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBureauQuery = { __typename?: 'Query', bureau?: { __typename?: 'Bureau', id: string } | null };
 
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
   name
+  description
 }
     `;
 export const GetBureausDocument = gql`
@@ -75,6 +81,17 @@ export const GetBureausDocument = gql`
 
 export function useGetBureausQuery(options?: Omit<Urql.UseQueryArgs<GetBureausQueryVariables>, 'query'>) {
   return Urql.useQuery<GetBureausQuery, GetBureausQueryVariables>({ query: GetBureausDocument, ...options });
+};
+export const GetBureauDocument = gql`
+    query GetBureau {
+  bureau(slug: "finance") {
+    id
+  }
+}
+    `;
+
+export function useGetBureauQuery(options?: Omit<Urql.UseQueryArgs<GetBureauQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetBureauQuery, GetBureauQueryVariables>({ query: GetBureauDocument, ...options });
 };
 import { IntrospectionQuery } from 'graphql';
 export default {

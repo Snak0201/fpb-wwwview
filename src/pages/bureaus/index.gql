@@ -7,4 +7,11 @@ query GetBureaus {
 fragment bureaus on Bureau {
   id
   name
+  description
+}
+
+query GetBureau {
+  bureau(slug: "finance") {
+    id
+  }
 }
