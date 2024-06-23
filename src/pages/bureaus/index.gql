@@ -9,3 +9,9 @@ fragment bureaus on Bureau {
   name
   description
 }
+
+query GetBureau {
+  bureau(slug: "finance") {
+    id
+  }
+}
