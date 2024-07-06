@@ -1,8 +1,12 @@
 fragment ArticlesPage on ArticleConnection {
-  ...ArticleList
+  nodes {
+    ...ArticleNodesField
+  }
 
   pageInfo {
     endCursor
     hasNextPage
   }
+
+  ...ArticleList
 }

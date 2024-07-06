@@ -1,7 +1,9 @@
 import { ArticleListFragment } from "@/graphql/generated"
 
 interface Props {
-  // articles: ArticleListFragment
+  articles: ArticleListFragment
 }
 
-export const ArticleList = () => <>ArticleList</>
+export const ArticleList = ({ articles }: Props) => {
+  return <>ArticleList</>
+}

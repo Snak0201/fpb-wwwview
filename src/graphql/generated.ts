@@ -121,14 +121,14 @@ export type ArticleListFragment = { __typename?: 'ArticleConnection', nodes?: Ar
 
 export type ArticleNodesFieldFragment = { __typename?: 'Article', title: string };
 
-export type ArticlesPageFragment = { __typename?: 'ArticleConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Article', title: string } | null> | null };
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean }, nodes?: Array<{ __typename?: 'Article', title: string } | null> | null } | null };
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -156,13 +156,17 @@ export const ArticleListFragmentDoc = gql`
     ${ArticleNodesFieldFragmentDoc}`;
 export const ArticlesPageFragmentDoc = gql`
     fragment ArticlesPage on ArticleConnection {
-  ...ArticleList
+  nodes {
+    ...ArticleNodesField
+  }
   pageInfo {
     endCursor
     hasNextPage
   }
+  ...ArticleList
 }
-    ${ArticleListFragmentDoc}`;
+    ${ArticleNodesFieldFragmentDoc}
+${ArticleListFragmentDoc}`;
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
