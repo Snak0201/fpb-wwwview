@@ -1,9 +1,0 @@
-fragment ArticleList on ArticleConnection {
-  nodes {
-    ...ArticleNodesField
-  }
-}
-
-fragment ArticleNodesField on Article {
-  title
-}

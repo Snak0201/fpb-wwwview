@@ -117,18 +117,16 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type ArticleListFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string } | null> | null };
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
-export type ArticleNodesFieldFragment = { __typename?: 'Article', title: string };
-
-export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+export type ArticleNodesFieldFragment = { __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -145,15 +143,13 @@ export type GetBureauQuery = { __typename?: 'Query', bureau?: { __typename?: 'Bu
 export const ArticleNodesFieldFragmentDoc = gql`
     fragment ArticleNodesField on Article {
   title
+  bureaus {
+    name
+  }
+  publishedAt
+  updatedAt
 }
     `;
-export const ArticleListFragmentDoc = gql`
-    fragment ArticleList on ArticleConnection {
-  nodes {
-    ...ArticleNodesField
-  }
-}
-    ${ArticleNodesFieldFragmentDoc}`;
 export const ArticlesPageFragmentDoc = gql`
     fragment ArticlesPage on ArticleConnection {
   nodes {
@@ -163,10 +159,8 @@ export const ArticlesPageFragmentDoc = gql`
     endCursor
     hasNextPage
   }
-  ...ArticleList
 }
-    ${ArticleNodesFieldFragmentDoc}
-${ArticleListFragmentDoc}`;
+    ${ArticleNodesFieldFragmentDoc}`;
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
