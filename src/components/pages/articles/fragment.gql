@@ -6,13 +6,3 @@ fragment ArticlesPage on ArticleConnection {
     hasNextPage
   }
 }
-
-fragment ArticleList on ArticleConnection {
-  nodes {
-    ...ArticleListField
-  }
-}
-
-fragment ArticleListField on Article {
-  title
-}
