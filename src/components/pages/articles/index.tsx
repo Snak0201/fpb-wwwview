@@ -3,7 +3,16 @@ import { useAtomValue } from "jotai"
 
 export const ArticlesPageComponent = () => {
   const articlesPage = useAtomValue(articlesPageAtom)
-  console.log(articlesPage)
+  const articles = articlesPage.nodes
 
-  return <>ArticlesPageComponent</>
+  if (!articles) return
+
+  return (
+    <>
+      {articles.map((article, index) => {
+        if (!article) return
+        return <p key={index}>{article.title}</p>
+      })}
+    </>
+  )
 }
