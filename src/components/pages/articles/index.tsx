@@ -1,3 +1,5 @@
+import { ViewContainer } from "@/components/ViewContainer"
+import { ViewLayout } from "@/layouts"
 import { articlesPageAtom } from "@/store/article"
 import { useAtomValue } from "jotai"
 
@@ -8,11 +10,13 @@ export const ArticlesPageComponent = () => {
   if (!articles) return
 
   return (
-    <>
-      {articles.map((article, index) => {
-        if (!article) return
-        return <p key={index}>{article.title}</p>
-      })}
-    </>
+    <ViewLayout title="記事一覧">
+      <ViewContainer>
+        {articles.map((article, index) => {
+          if (!article) return
+          return <p key={index}>{article.title}</p>
+        })}
+      </ViewContainer>
+    </ViewLayout>
   )
 }
