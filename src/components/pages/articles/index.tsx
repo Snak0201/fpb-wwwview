@@ -14,7 +14,16 @@ export const ArticlesPageComponent = () => {
         <h1>記事一覧</h1>
         {articles.nodes?.map((article, index) => {
           if (!article) return
-          return <p key={index}>{article.title}</p>
+          return (
+            <div key={index}>
+              <p>{article.title}</p>
+              <p>{article.updatedAt}</p>
+              <p>{article.publishedAt}</p>
+              {article.bureaus?.map((bureau) => (
+                <>{bureau.name}</>
+              ))}
+            </div>
+          )
         })}
       </ViewContainer>
     </ViewLayout>
