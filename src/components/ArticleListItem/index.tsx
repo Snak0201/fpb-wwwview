@@ -1,3 +1,4 @@
+import { styles } from "@/components/ArticleListItem/style.css"
 import { ArticleListItemFragment } from "@/graphql/generated"
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
  */
 export const ArticleListItem = ({ article }: Props) => {
   return (
-    <div>
+    <div className={styles.card}>
       <p>{article.title}</p>
       <p>{article.updatedAt}</p>
       <p>{article.publishedAt}</p>
