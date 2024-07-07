@@ -1,0 +1,8 @@
+fragment ArticleListItem on Article {
+  title
+  bureaus {
+    name
+  }
+  publishedAt
+  updatedAt
+}

@@ -1,3 +1,4 @@
+import { ArticleListItem } from "@/components/ArticleListItem"
 import { ViewContainer } from "@/components/ViewContainer"
 import { ViewLayout } from "@/layouts"
 import { articlesPageAtom } from "@/store/article"
@@ -14,16 +15,7 @@ export const ArticlesPageComponent = () => {
         <h1>記事一覧</h1>
         {articles.nodes?.map((article, index) => {
           if (!article) return
-          return (
-            <div key={index}>
-              <p>{article.title}</p>
-              <p>{article.updatedAt}</p>
-              <p>{article.publishedAt}</p>
-              {article.bureaus?.map((bureau) => (
-                <>{bureau.name}</>
-              ))}
-            </div>
-          )
+          return <ArticleListItem article={article} key={index} />
         })}
       </ViewContainer>
     </ViewLayout>

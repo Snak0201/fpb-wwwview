@@ -117,9 +117,9 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+export type ArticleListItemFragment = { __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
 
-export type ArticleNodesFieldFragment = { __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -140,8 +140,8 @@ export type GetBureauQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBureauQuery = { __typename?: 'Query', bureau?: { __typename?: 'Bureau', id: string } | null };
 
-export const ArticleNodesFieldFragmentDoc = gql`
-    fragment ArticleNodesField on Article {
+export const ArticleListItemFragmentDoc = gql`
+    fragment ArticleListItem on Article {
   title
   bureaus {
     name
@@ -153,14 +153,14 @@ export const ArticleNodesFieldFragmentDoc = gql`
 export const ArticlesPageFragmentDoc = gql`
     fragment ArticlesPage on ArticleConnection {
   nodes {
-    ...ArticleNodesField
+    ...ArticleListItem
   }
   pageInfo {
     endCursor
     hasNextPage
   }
 }
-    ${ArticleNodesFieldFragmentDoc}`;
+    ${ArticleListItemFragmentDoc}`;
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id

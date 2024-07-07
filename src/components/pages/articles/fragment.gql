@@ -1,19 +1,10 @@
 fragment ArticlesPage on ArticleConnection {
   nodes {
-    ...ArticleNodesField
+    ...ArticleListItem
   }
 
   pageInfo {
     endCursor
     hasNextPage
   }
-}
-
-fragment ArticleNodesField on Article {
-  title
-  bureaus {
-    name
-  }
-  publishedAt
-  updatedAt
 }
