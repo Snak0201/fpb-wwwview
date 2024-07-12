@@ -117,9 +117,9 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type ArticleListItemFragment = { __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
+export type ArticleListItemFragment = { __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null };
 
-export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } };
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -127,7 +127,7 @@ export type GetArticlesPageQueryVariables = Exact<{
 }>;
 
 
-export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -143,6 +143,7 @@ export type GetBureauQuery = { __typename?: 'Query', bureau?: { __typename?: 'Bu
 
 export const ArticleListItemFragmentDoc = gql`
     fragment ArticleListItem on Article {
+  id
   title
   bureaus {
     name
