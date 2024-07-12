@@ -1,5 +1,5 @@
-query GetArticlesPage($first: Int = 10) {
-  articles(first: $first) {
+query GetArticlesPage($first: Int = 10, $endCursor: String) {
+  articles(first: $first, after: $endCursor) {
     ...ArticlesPage
   }
 }
