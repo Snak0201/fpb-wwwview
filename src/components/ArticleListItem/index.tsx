@@ -11,7 +11,7 @@ interface Props {
 export const ArticleListItem = ({ article }: Props) => {
   return (
     <div className={styles.card}>
-      <p>{article.title}</p>
+      <h2>{article.title}</h2>
       <p>{article.updatedAt}</p>
       <p>{article.publishedAt}</p>
       {article.bureaus?.map((bureau) => (
