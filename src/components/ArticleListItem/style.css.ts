@@ -6,4 +6,7 @@ export const styles = {
     padding: "5px",
     boxShadow: " 0 10px 25px 0 rgba(0, 0, 0, .2)",
   }),
+  title: style({ fontSize: "24px", textDecoration: "none" }),
+  description: style({ marginRight: "5px" }),
+  bureau: style({ textDecoration: "none", marginRight: "5px" }),
 }
