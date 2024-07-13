@@ -29,16 +29,18 @@ export const ArticleListItem = ({ article }: Props) => {
       <a href={`articles/${article.id}`}>{article.title}</a>
 
       {!!article.publishedAt && (
-        <p>公開日時: {formattedPublishedAt(article.publishedAt)}</p>
+        <div>公開日時: {formattedPublishedAt(article.publishedAt)}</div>
       )}
 
       {!!article.bureaus?.length && (
-        <p>
-          管轄局:{" "}
+        <div>
+          管轄局:
           {article.bureaus.map((bureau, index) => (
-            <span key={index}>{bureau.name} </span>
+            <a href={`bureaus/${bureau.slug}`} key={index}>
+              {bureau.name}
+            </a>
           ))}
-        </p>
+        </div>
       )}
     </div>
   )

@@ -3,6 +3,7 @@ fragment ArticleListItem on Article {
   title
   bureaus {
     name
+    slug
   }
   publishedAt
   updatedAt
