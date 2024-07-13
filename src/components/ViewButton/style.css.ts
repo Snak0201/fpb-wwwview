@@ -1,3 +1,4 @@
+import { mediaQuery } from "@/constants/mediaQuery"
 import { style } from "@vanilla-extract/css"
 
 export const styles = {
@@ -14,9 +15,15 @@ export const styles = {
     borderRadius: "100vh",
     transition: "0.5s",
     display: "block",
+
     ":hover": {
       color: "#4E5BA8",
       backgroundColor: "#FFFFFF",
+    },
+    "@media": {
+      [mediaQuery.tab]: {
+        padding: "1rem 2.5rem",
+      },
     },
     selectors: {
       "&.holizontal": {

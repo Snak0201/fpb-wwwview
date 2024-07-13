@@ -1,3 +1,4 @@
+import { mediaQuery } from "@/constants/mediaQuery"
 import { style } from "@vanilla-extract/css"
 
 export const styles = {
@@ -6,7 +7,15 @@ export const styles = {
     padding: "5px",
     boxShadow: " 0 10px 25px 0 rgba(0, 0, 0, .2)",
   }),
-  title: style({ fontSize: "24px", textDecoration: "none" }),
+  title: style({
+    fontSize: "24px",
+    textDecoration: "none",
+    "@media": {
+      [mediaQuery.tab]: {
+        fontSize: "18px",
+      },
+    },
+  }),
   description: style({ marginRight: "5px" }),
   bureau: style({ textDecoration: "none", marginRight: "5px" }),
 }
