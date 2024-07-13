@@ -3,6 +3,7 @@ import { atom } from "jotai"
 
 export const emptyArticlesPage: ArticlesPageFragment = {
   pageInfo: {
+    hasPreviousPage: false,
     hasNextPage: false,
   },
 }
