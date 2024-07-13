@@ -8,7 +8,7 @@ import { articlesPageAtom } from "@/store/article"
 import { useAtomValue } from "jotai"
 import { useEffect, useState } from "react"
 
-export const PAGINATE_ARTICLES_PER = 10
+export const PAGINATE_ARTICLES_PER = 5
 
 export const ArticlesPageComponent = () => {
   const ssrArticles = useAtomValue(articlesPageAtom)
@@ -68,12 +68,18 @@ export const ArticlesPageComponent = () => {
           if (!article) return
           return <ArticleListItem article={article} key={index} />
         })}
-        {articles.pageInfo.hasPreviousPage && (
-          <ViewButton onClick={getPreviousArticles}>前へ</ViewButton>
-        )}
-        {articles.pageInfo.hasNextPage && (
-          <ViewButton onClick={getNextArticles}>次へ</ViewButton>
-        )}
+        <div>
+          {articles.pageInfo.hasPreviousPage && (
+            <ViewButton onClick={getPreviousArticles} isHolizontal={true}>
+              前へ
+            </ViewButton>
+          )}
+          {articles.pageInfo.hasNextPage && (
+            <ViewButton onClick={getNextArticles} isHolizontal={true}>
+              次へ
+            </ViewButton>
+          )}
+        </div>
       </ViewContainer>
     </ViewLayout>
   )
