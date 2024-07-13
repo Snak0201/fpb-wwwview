@@ -12,22 +12,39 @@ export const ArticlesPageComponent = () => {
 
   const [articles, setArticles] = useState(ssrArticles)
 
-  const [csrArticles, csrQuery] = useGetArticlesPageQuery({
+  const [csrNextArticles, csrNextQuery] = useGetArticlesPageQuery({
     variables: {
       endCursor: articles.pageInfo.endCursor,
     },
     pause: true,
   })
 
-  const getArticles = () => {
-    csrQuery(csrOptions)
+  const [csrPreviousArticles, csrPrivousQuery] = useGetArticlesPageQuery({
+    variables: {
+      endCursor: articles.pageInfo.startCursor,
+    },
+    pause: true,
+  })
+
+  const getPreviousArticles = () => {
+    csrPrivousQuery(csrOptions)
+  }
+
+  const getNextArticles = () => {
+    csrNextQuery(csrOptions)
   }
 
   useEffect(() => {
-    if (!csrArticles.data?.articles) return
+    if (!csrPreviousArticles.data?.articles) return
 
-    setArticles(csrArticles.data?.articles)
-  }, [csrArticles.data?.articles])
+    setArticles(csrPreviousArticles.data?.articles)
+  }, [csrPreviousArticles.data?.articles])
+
+  useEffect(() => {
+    if (!csrNextArticles.data?.articles) return
+
+    setArticles(csrNextArticles.data?.articles)
+  }, [csrNextArticles.data?.articles])
 
   if (!articles) return
 
@@ -39,8 +56,11 @@ export const ArticlesPageComponent = () => {
           if (!article) return
           return <ArticleListItem article={article} key={index} />
         })}
+        {articles.pageInfo.hasPreviousPage && (
+          <button onClick={getPreviousArticles}>前へ</button>
+        )}
         {articles.pageInfo.hasNextPage && (
-          <button onClick={getArticles}>次へ</button>
+          <button onClick={getNextArticles}>次へ</button>
         )}
       </ViewContainer>
     </ViewLayout>
