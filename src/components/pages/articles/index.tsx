@@ -7,6 +7,8 @@ import { articlesPageAtom } from "@/store/article"
 import { useAtomValue } from "jotai"
 import { useEffect, useState } from "react"
 
+export const PAGINATE_ARTICLES_PER = 10
+
 export const ArticlesPageComponent = () => {
   const ssrArticles = useAtomValue(articlesPageAtom)
 
@@ -14,8 +16,10 @@ export const ArticlesPageComponent = () => {
 
   const [csrNextArticles, csrNextQuery] = useGetArticlesPageQuery({
     variables: {
+      first: PAGINATE_ARTICLES_PER,
       endCursor: articles.pageInfo.endCursor,
     },
+    requestPolicy: "cache-and-network",
     pause: true,
   })
 
@@ -31,8 +35,10 @@ export const ArticlesPageComponent = () => {
 
   const [csrPreviousArticles, csrPrivousQuery] = useGetArticlesPageQuery({
     variables: {
+      last: PAGINATE_ARTICLES_PER,
       startCursor: articles.pageInfo.startCursor,
     },
+    requestPolicy: "cache-and-network",
     pause: true,
   })
 
@@ -45,10 +51,6 @@ export const ArticlesPageComponent = () => {
 
     setArticles(csrPreviousArticles.data?.articles)
   }, [csrPreviousArticles.data?.articles])
-
-  useEffect(() => {
-    console.log(articles.pageInfo)
-  }, [articles])
 
   if (!articles) return
 
