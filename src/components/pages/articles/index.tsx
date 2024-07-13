@@ -1,4 +1,5 @@
 import { ArticleListItem } from "@/components/ArticleListItem"
+import { ViewButton } from "@/components/ViewButton"
 import { ViewContainer } from "@/components/ViewContainer"
 import { csrOptions } from "@/constants/urql"
 import { useGetArticlesPageQuery } from "@/graphql/generated"
@@ -68,10 +69,10 @@ export const ArticlesPageComponent = () => {
           return <ArticleListItem article={article} key={index} />
         })}
         {articles.pageInfo.hasPreviousPage && (
-          <button onClick={getPreviousArticles}>前へ</button>
+          <ViewButton onClick={getPreviousArticles}>前へ</ViewButton>
         )}
         {articles.pageInfo.hasNextPage && (
-          <button onClick={getNextArticles}>次へ</button>
+          <ViewButton onClick={getNextArticles}>次へ</ViewButton>
         )}
       </ViewContainer>
     </ViewLayout>
