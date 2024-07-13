@@ -1,4 +1,7 @@
-import { ArticlesPageComponent } from "@/components/pages/articles"
+import {
+  ArticlesPageComponent,
+  PAGINATE_ARTICLES_PER,
+} from "@/components/pages/articles"
 import { ssrClient } from "@/constants/urql"
 import {
   GetArticlesPageDocument,
@@ -13,7 +16,11 @@ import { cacheExchange, fetchExchange } from "urql"
 interface Props {}
 
 const ArticlesPage = () => {
-  const [articles] = useGetArticlesPageQuery()
+  const [articles] = useGetArticlesPageQuery({
+    variables: {
+      first: PAGINATE_ARTICLES_PER,
+    },
+  })
   useHydrateAtoms([
     [articlesPageAtom, articles.data?.articles || emptyArticlesPage],
   ])
@@ -25,7 +32,11 @@ export const getServerSideProps = (async (context) => {
   const { ssrCache, client } = ssrClient()
 
   try {
-    await Promise.all([client.query(GetArticlesPageDocument, {}).toPromise()])
+    await Promise.all([
+      client
+        .query(GetArticlesPageDocument, { first: PAGINATE_ARTICLES_PER })
+        .toPromise(),
+    ])
   } catch (e) {
     console.log(e)
   }

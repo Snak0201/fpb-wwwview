@@ -19,6 +19,11 @@ export const ArticlesPageComponent = () => {
       first: PAGINATE_ARTICLES_PER,
       endCursor: articles.pageInfo.endCursor,
     },
+    /**
+     * NOTE: ページネーションの「戻って進む」動作のとき
+     * キャッシュが効いてクエリが動かないため、
+     * キャッシュを使いつつクエリも飛ばすようにしている
+     */
     requestPolicy: "cache-and-network",
     pause: true,
   })
