@@ -46,6 +46,10 @@ export const ArticlesPageComponent = () => {
     setArticles(csrPreviousArticles.data?.articles)
   }, [csrPreviousArticles.data?.articles])
 
+  useEffect(() => {
+    console.log(articles.pageInfo)
+  }, [articles])
+
   if (!articles) return
 
   return (

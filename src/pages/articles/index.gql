@@ -1,5 +1,5 @@
 query GetArticlesPage(
-  $first: Int = 10
+  $first: Int = 5
   $endCursor: String
   $startCursor: String
 ) {

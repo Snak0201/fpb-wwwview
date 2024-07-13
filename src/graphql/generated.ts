@@ -174,7 +174,7 @@ export const BureausFragmentDoc = gql`
 }
     `;
 export const GetArticlesPageDocument = gql`
-    query GetArticlesPage($first: Int = 10, $endCursor: String, $startCursor: String) {
+    query GetArticlesPage($first: Int = 5, $endCursor: String, $startCursor: String) {
   articles(first: $first, after: $endCursor, before: $startCursor) {
     ...ArticlesPage
   }
