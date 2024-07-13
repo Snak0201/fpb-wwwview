@@ -1,4 +1,5 @@
 import { styles } from "@/components/ArticleListItem/style.css"
+import { ViewA } from "@/components/ViewA"
 import { ArticleListItemFragment } from "@/graphql/generated"
 
 interface Props {
@@ -26,14 +27,13 @@ export const ArticleListItem = ({ article }: Props) => {
 
   return (
     <div className={styles.card}>
-      <a
-        className={styles.title}
+      <ViewA
         href={`articles/${article.id}`}
-        target="_blank"
-        rel="noopener noreferrer"
+        className={styles.title}
+        opensInNewTab={true}
       >
         {article.title}
-      </a>
+      </ViewA>
 
       {!!article.publishedAt && (
         <div>
@@ -46,15 +46,14 @@ export const ArticleListItem = ({ article }: Props) => {
         <div>
           <span className={styles.description}>管轄局:</span>
           {article.bureaus.map((bureau, index) => (
-            <a
-              className={styles.bureau}
-              href={`bureaus/${bureau.slug}`}
+            <ViewA
               key={index}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`bureaus/${bureau.slug}`}
+              className={styles.bureau}
+              opensInNewTab={true}
             >
               {bureau.name}
-            </a>
+            </ViewA>
           ))}
         </div>
       )}
