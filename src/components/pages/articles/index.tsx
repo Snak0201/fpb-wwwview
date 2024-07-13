@@ -19,9 +19,19 @@ export const ArticlesPageComponent = () => {
     pause: true,
   })
 
+  const getNextArticles = () => {
+    csrNextQuery(csrOptions)
+  }
+
+  useEffect(() => {
+    if (!csrNextArticles.data?.articles) return
+
+    setArticles(csrNextArticles.data?.articles)
+  }, [csrNextArticles.data?.articles])
+
   const [csrPreviousArticles, csrPrivousQuery] = useGetArticlesPageQuery({
     variables: {
-      endCursor: articles.pageInfo.startCursor,
+      startCursor: articles.pageInfo.startCursor,
     },
     pause: true,
   })
@@ -30,21 +40,11 @@ export const ArticlesPageComponent = () => {
     csrPrivousQuery(csrOptions)
   }
 
-  const getNextArticles = () => {
-    csrNextQuery(csrOptions)
-  }
-
   useEffect(() => {
     if (!csrPreviousArticles.data?.articles) return
 
     setArticles(csrPreviousArticles.data?.articles)
   }, [csrPreviousArticles.data?.articles])
-
-  useEffect(() => {
-    if (!csrNextArticles.data?.articles) return
-
-    setArticles(csrNextArticles.data?.articles)
-  }, [csrNextArticles.data?.articles])
 
   if (!articles) return
 
