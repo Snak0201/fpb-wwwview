@@ -3,22 +3,22 @@ import { ReactNode } from "react"
 interface Props {
   href: string
   className?: string
-  isOpenNewTab?: boolean
+  opensInNewTab?: boolean
   children: ReactNode
 }
 
 /**
  * View共通でつかうaタグ
  *
- * 新しいタブを指定する場合、isOpenNewTabをtrueに設定する
+ * 新しいタブを指定する場合、opensInNewTabをtrueに設定する
  */
 export const ViewA = ({
   href,
   className = "",
-  isOpenNewTab = false,
+  opensInNewTab = false,
   children,
 }: Props) => {
-  if (!isOpenNewTab)
+  if (!opensInNewTab)
     return (
       <a href={href} className={className}>
         {children}
