@@ -69,14 +69,14 @@ export const ArticlesPageComponent = () => {
           return <ArticleListItem article={article} key={index} />
         })}
         <div>
-          {articles.pageInfo.hasPreviousPage && (
-            <ViewButton onClick={getPreviousArticles} isHolizontal={true}>
-              前へ
-            </ViewButton>
-          )}
           {articles.pageInfo.hasNextPage && (
             <ViewButton onClick={getNextArticles} isHolizontal={true}>
               次へ
+            </ViewButton>
+          )}
+          {articles.pageInfo.hasPreviousPage && (
+            <ViewButton onClick={getPreviousArticles} isHolizontal={true}>
+              前へ
             </ViewButton>
           )}
         </div>
