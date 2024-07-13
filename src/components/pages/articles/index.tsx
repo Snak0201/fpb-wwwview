@@ -8,7 +8,7 @@ import { articlesPageAtom } from "@/store/article"
 import { useAtomValue } from "jotai"
 import { useEffect, useState } from "react"
 
-export const PAGINATE_ARTICLES_PER = 5
+export const PAGINATE_ARTICLES_PER = 10
 
 export const ArticlesPageComponent = () => {
   const ssrArticles = useAtomValue(articlesPageAtom)
