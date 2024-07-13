@@ -3,6 +3,7 @@ import { useAtomValue } from "jotai"
 import { styles } from "@/components/pages/bureaus/style.css"
 import { useGetBureauQuery } from "@/graphql/generated"
 import { csrOptions } from "@/constants/urql"
+import { ViewA } from "@/components/ViewA"
 
 export const BureausPageComponent = () => {
   const bureaus = useAtomValue(bureausAtom)
@@ -20,6 +21,7 @@ export const BureausPageComponent = () => {
         <div key={i}>{bureau.name}</div>
       ))}
       <button onClick={getBureau}>局取得</button>
+      <ViewA href="/">トップ</ViewA>
     </>
   )
 }
