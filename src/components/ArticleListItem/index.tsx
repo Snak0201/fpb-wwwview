@@ -26,17 +26,33 @@ export const ArticleListItem = ({ article }: Props) => {
 
   return (
     <div className={styles.card}>
-      <a href={`articles/${article.id}`}>{article.title}</a>
+      <a
+        className={styles.title}
+        href={`articles/${article.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {article.title}
+      </a>
 
       {!!article.publishedAt && (
-        <div>公開日時: {formattedPublishedAt(article.publishedAt)}</div>
+        <div>
+          <span className={styles.description}>公開日時:</span>
+          {formattedPublishedAt(article.publishedAt)}
+        </div>
       )}
 
       {!!article.bureaus?.length && (
         <div>
-          管轄局:
+          <span className={styles.description}>管轄局:</span>
           {article.bureaus.map((bureau, index) => (
-            <a href={`bureaus/${bureau.slug}`} key={index}>
+            <a
+              className={styles.bureau}
+              href={`bureaus/${bureau.slug}`}
+              key={index}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {bureau.name}
             </a>
           ))}
