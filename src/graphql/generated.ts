@@ -123,6 +123,7 @@ export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: A
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   endCursor?: InputMaybe<Scalars['String']['input']>;
   startCursor?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -174,8 +175,8 @@ export const BureausFragmentDoc = gql`
 }
     `;
 export const GetArticlesPageDocument = gql`
-    query GetArticlesPage($first: Int = 5, $endCursor: String, $startCursor: String) {
-  articles(first: $first, after: $endCursor, before: $startCursor) {
+    query GetArticlesPage($first: Int, $last: Int, $endCursor: String, $startCursor: String) {
+  articles(first: $first, last: $last, after: $endCursor, before: $startCursor) {
     ...ArticlesPage
   }
 }

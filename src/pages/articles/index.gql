@@ -1,9 +1,15 @@
 query GetArticlesPage(
-  $first: Int = 5
+  $first: Int
+  $last: Int
   $endCursor: String
   $startCursor: String
 ) {
-  articles(first: $first, after: $endCursor, before: $startCursor) {
+  articles(
+    first: $first
+    last: $last
+    after: $endCursor
+    before: $startCursor
+  ) {
     ...ArticlesPage
   }
 }
