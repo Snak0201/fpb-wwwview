@@ -1,5 +1,6 @@
 import { styles } from "@/components/ArticleListItem/style.css"
 import { ViewA } from "@/components/ViewA"
+import { formatDatetimezone } from "@/constants/format"
 import { ArticleListItemFragment } from "@/graphql/generated"
 
 interface Props {
@@ -10,20 +11,8 @@ interface Props {
  * 記事一覧内の一アイテム
  */
 export const ArticleListItem = ({ article }: Props) => {
-  /**
-   * タイムゾーン付きの日時文字列を変換する
-   *
-   * 2024-06-16T13:36:09+09:00 => 2024年06月16日 13時36分
-   *  */
-  const formattedPublishedAt = (datetimezoneString: string) => {
-    const dateString = datetimezoneString.split("T")[0]
-    const [yearString, monthString, dayString] = dateString.split("-")
-    const [hourString, minuteString] = datetimezoneString
-      .split("T")[1]
-      .split("+")[0]
-      .split(":")
-    return `${yearString}年${monthString}月${dayString}日 ${hourString}時${minuteString}分`
-  }
+  const publishedAt = formatDatetimezone(article.publishedAt)
+  const updatedAt = formatDatetimezone(article.updatedAt)
 
   return (
     <div className={styles.card}>
@@ -34,13 +23,6 @@ export const ArticleListItem = ({ article }: Props) => {
       >
         {article.title}
       </ViewA>
-
-      {!!article.publishedAt && (
-        <div>
-          <span className={styles.description}>公開日時:</span>
-          {formattedPublishedAt(article.publishedAt)}
-        </div>
-      )}
 
       {!!article.bureaus?.length && (
         <div>
@@ -55,6 +37,20 @@ export const ArticleListItem = ({ article }: Props) => {
               {bureau.name}
             </ViewA>
           ))}
+        </div>
+      )}
+
+      {!!publishedAt && (
+        <div>
+          <span className={styles.description}>公開日時:</span>
+          {publishedAt}
+        </div>
+      )}
+
+      {!!updatedAt && publishedAt !== updatedAt && (
+        <div>
+          <span className={styles.description}>更新日時:</span>
+          {updatedAt}
         </div>
       )}
     </div>
