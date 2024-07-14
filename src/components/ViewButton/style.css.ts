@@ -1,3 +1,4 @@
+import { color } from "@/constants/color"
 import { mediaQuery } from "@/constants/mediaQuery"
 import { style } from "@vanilla-extract/css"
 
@@ -9,16 +10,16 @@ export const styles = {
     padding: "1rem 4rem",
     fontWeight: "bold",
     fontSize: "20px",
-    border: "2px solid #4E5BA8",
-    color: "#FFFFFF",
-    backgroundColor: "#4E5BA8",
+    border: `2px solid ${color.blue}`,
+    color: color.white,
+    backgroundColor: color.blue,
     borderRadius: "100vh",
     transition: "0.5s",
     display: "block",
 
     ":hover": {
-      color: "#4E5BA8",
-      backgroundColor: "#FFFFFF",
+      color: color.blue,
+      backgroundColor: color.white,
     },
     "@media": {
       [mediaQuery.tab]: {
@@ -40,15 +41,15 @@ export const styles = {
     padding: "1rem 4rem",
     fontWeight: "bold",
     fontSize: "20px",
-    border: "2px solid #F05A5A",
-    color: "#FFFFFF",
-    backgroundColor: "#F05A5A",
+    border: `2px solid ${color.alertRed}`,
+    color: color.white,
+    backgroundColor: color.alertRed,
     borderRadius: "100vh",
     transition: "0.5s",
     display: "block",
     ":hover": {
-      color: "#F05A5A",
-      backgroundColor: "#FFFFFF",
+      color: color.alertRed,
+      backgroundColor: color.white,
     },
     selectors: {
       "&.holizontal": {
