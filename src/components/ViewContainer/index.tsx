@@ -6,7 +6,7 @@ interface Props {
 }
 
 /**
- * 画面サイズの制御コンポーネント
+ * View共通の画面サイズの制御コンポーネント
  */
 export const ViewContainer = ({ children }: Props) => {
   return <div className={styles.container}>{children}</div>
