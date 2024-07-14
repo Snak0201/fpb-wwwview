@@ -1,0 +1,12 @@
+fragment ArticlesPage on ArticleConnection {
+  nodes {
+    ...ArticleListItem
+  }
+
+  pageInfo {
+    startCursor
+    endCursor
+    hasPreviousPage
+    hasNextPage
+  }
+}

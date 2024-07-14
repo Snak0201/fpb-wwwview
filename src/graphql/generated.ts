@@ -18,6 +18,47 @@ export type Scalars = {
   ISO8601DateTime: { input: any; output: any; }
 };
 
+/** published article on Hoshinonaka Government */
+export type Article = {
+  __typename?: 'Article';
+  /** jurisdiction bureau */
+  bureaus?: Maybe<Array<Bureau>>;
+  /** markdown content */
+  content?: Maybe<Scalars['String']['output']>;
+  /** created at */
+  createdAt: Scalars['ISO8601DateTime']['output'];
+  /** id */
+  id: Scalars['ID']['output'];
+  /** category number */
+  number: Scalars['Int']['output'];
+  /** published at */
+  publishedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  /** title */
+  title: Scalars['String']['output'];
+  /** updated at */
+  updatedAt: Scalars['ISO8601DateTime']['output'];
+};
+
+/** The connection type for Article. */
+export type ArticleConnection = {
+  __typename?: 'ArticleConnection';
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<ArticleEdge>>>;
+  /** A list of nodes. */
+  nodes?: Maybe<Array<Maybe<Article>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type ArticleEdge = {
+  __typename?: 'ArticleEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node?: Maybe<Article>;
+};
+
 /** bureau model */
 export type Bureau = {
   __typename?: 'Bureau';
@@ -37,13 +78,37 @@ export type Bureau = {
   updatedAt: Scalars['ISO8601DateTime']['output'];
 };
 
+/** Information about pagination in a connection. */
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** queries */
 export type Query = {
   __typename?: 'Query';
-  /** get single bureau with slug */
+  /** all published articles */
+  articles?: Maybe<ArticleConnection>;
+  /** single bureau with slug */
   bureau?: Maybe<Bureau>;
-  /** get all bureaus */
+  /** all bureaus */
   bureaus?: Maybe<Array<Bureau>>;
+};
+
+
+/** queries */
+export type QueryArticlesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -51,6 +116,20 @@ export type Query = {
 export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
+
+export type ArticleListItemFragment = { __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null };
+
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } };
+
+export type GetArticlesPageQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  endCursor?: InputMaybe<Scalars['String']['input']>;
+  startCursor?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -64,6 +143,31 @@ export type GetBureauQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBureauQuery = { __typename?: 'Query', bureau?: { __typename?: 'Bureau', id: string } | null };
 
+export const ArticleListItemFragmentDoc = gql`
+    fragment ArticleListItem on Article {
+  id
+  title
+  bureaus {
+    name
+    slug
+  }
+  publishedAt
+  updatedAt
+}
+    `;
+export const ArticlesPageFragmentDoc = gql`
+    fragment ArticlesPage on ArticleConnection {
+  nodes {
+    ...ArticleListItem
+  }
+  pageInfo {
+    startCursor
+    endCursor
+    hasPreviousPage
+    hasNextPage
+  }
+}
+    ${ArticleListItemFragmentDoc}`;
 export const BureausFragmentDoc = gql`
     fragment bureaus on Bureau {
   id
@@ -71,6 +175,17 @@ export const BureausFragmentDoc = gql`
   description
 }
     `;
+export const GetArticlesPageDocument = gql`
+    query GetArticlesPage($first: Int, $last: Int, $endCursor: String, $startCursor: String) {
+  articles(first: $first, last: $last, after: $endCursor, before: $startCursor) {
+    ...ArticlesPage
+  }
+}
+    ${ArticlesPageFragmentDoc}`;
+
+export function useGetArticlesPageQuery(options?: Omit<Urql.UseQueryArgs<GetArticlesPageQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetArticlesPageQuery, GetArticlesPageQueryVariables>({ query: GetArticlesPageDocument, ...options });
+};
 export const GetBureausDocument = gql`
     query GetBureaus {
   bureaus {
@@ -102,6 +217,169 @@ export default {
     "mutationType": null,
     "subscriptionType": null,
     "types": [
+      {
+        "kind": "OBJECT",
+        "name": "Article",
+        "fields": [
+          {
+            "name": "bureaus",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Bureau",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "createdAt",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "number",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "publishedAt",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "title",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "updatedAt",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ArticleConnection",
+        "fields": [
+          {
+            "name": "edges",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ArticleEdge",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "nodes",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Article",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "pageInfo",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ArticleEdge",
+        "fields": [
+          {
+            "name": "cursor",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "node",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Article",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
       {
         "kind": "OBJECT",
         "name": "Bureau",
@@ -185,8 +463,91 @@ export default {
       },
       {
         "kind": "OBJECT",
+        "name": "PageInfo",
+        "fields": [
+          {
+            "name": "endCursor",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "hasNextPage",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "hasPreviousPage",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "startCursor",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Query",
         "fields": [
+          {
+            "name": "articles",
+            "type": {
+              "kind": "OBJECT",
+              "name": "ArticleConnection",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "before",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "last",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
           {
             "name": "bureau",
             "type": {

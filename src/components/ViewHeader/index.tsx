@@ -8,7 +8,7 @@ interface NavLink {
 }
 
 /**
- * ヘッダー
+ * View共通で使うヘッダー
  */
 export const ViewHeader = () => {
   const navLinks: NavLink[] = [
