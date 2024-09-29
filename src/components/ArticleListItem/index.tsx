@@ -40,6 +40,22 @@ export const ArticleListItem = ({ article }: Props) => {
         </div>
       )}
 
+      {!!article.committees?.length && (
+        <div>
+          <span className={styles.description}>管轄委員会:</span>
+          {article.committees.map((committee, index) => (
+            <ViewA
+              key={index}
+              href={`committees/${committee.slug}`}
+              className={styles.committee}
+              opensInNewTab={true}
+            >
+              {committee.name}
+            </ViewA>
+          ))}
+        </div>
+      )}
+
       {!!publishedAt && (
         <div>
           <span className={styles.description}>公開日時:</span>
