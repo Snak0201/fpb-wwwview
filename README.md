@@ -15,3 +15,7 @@
 3. `fpb-wwwsite`を起動します
 4. `docker compose up -d`で起動します
 5. `localhost:8001`で画面が開きます
+
+## リリース手順
+
+1. サーバー内の該当フォルダで`yarn release`コマンドを実行する
