@@ -37,6 +37,9 @@ jobs:
       
       - name: yarn install
         run: yarn
+      
+      - name: yarn tsc
+        run: yarn tsc
 
       - name: yarn build
         run: yarn build
