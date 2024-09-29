@@ -19,7 +19,7 @@ export const ViewHeader = () => {
 
   return (
     <nav className={styles.nav}>
-      <Link href="links" className={styles.logoLink}>
+      <Link href="/" className={styles.logoLink}>
         <Image
           src="/images/logo.png"
           alt="ロゴ画像"
