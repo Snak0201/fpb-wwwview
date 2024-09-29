@@ -16,6 +16,7 @@ export const ViewLayout = ({ title, children }: Props) => {
   return (
     <>
       <Head>
+        <link rel="icon" href="images/favicon.ico" />
         <title>{title}</title>
       </Head>
       <div className={styles.viewUpperContent}>
