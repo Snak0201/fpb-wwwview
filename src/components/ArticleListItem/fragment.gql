@@ -5,6 +5,10 @@ fragment ArticleListItem on Article {
     name
     slug
   }
+  committees {
+    name
+    slug
+  }
   publishedAt
   updatedAt
 }

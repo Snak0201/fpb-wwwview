@@ -21,8 +21,10 @@ export type Scalars = {
 /** published article on Hoshinonaka Government */
 export type Article = {
   __typename?: 'Article';
-  /** jurisdiction bureau */
+  /** jurisdiction bureaus */
   bureaus?: Maybe<Array<Bureau>>;
+  /** jurisdiction committees */
+  committees?: Maybe<Array<Committee>>;
   /** markdown content */
   content?: Maybe<Scalars['String']['output']>;
   /** created at */
@@ -78,6 +80,40 @@ export type Bureau = {
   updatedAt: Scalars['ISO8601DateTime']['output'];
 };
 
+/** article tags */
+export type Committee = {
+  __typename?: 'Committee';
+  /** committee articles list */
+  articles?: Maybe<ArticleConnection>;
+  /** jurisdiction bureau */
+  bureau?: Maybe<Bureau>;
+  /** markdown content */
+  content?: Maybe<Scalars['String']['output']>;
+  /** created_at */
+  createdAt: Scalars['ISO8601DateTime']['output'];
+  /** short description */
+  description: Scalars['String']['output'];
+  /** id */
+  id: Scalars['ID']['output'];
+  /** name */
+  name: Scalars['String']['output'];
+  /** search keyword */
+  slug: Scalars['String']['output'];
+  /** is special committee */
+  special: Scalars['Boolean']['output'];
+  /** updated_at */
+  updatedAt: Scalars['ISO8601DateTime']['output'];
+};
+
+
+/** article tags */
+export type CommitteeArticlesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -100,6 +136,10 @@ export type Query = {
   bureau?: Maybe<Bureau>;
   /** all bureaus */
   bureaus?: Maybe<Array<Bureau>>;
+  /** committee detail */
+  committee?: Maybe<Committee>;
+  /** all committees list */
+  committees?: Maybe<Array<Committee>>;
 };
 
 
@@ -117,9 +157,15 @@ export type QueryBureauArgs = {
   slug: Scalars['String']['input'];
 };
 
-export type ArticleListItemFragment = { __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null };
 
-export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } };
+/** queries */
+export type QueryCommitteeArgs = {
+  slug: Scalars['String']['input'];
+};
+
+export type ArticleListItemFragment = { __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null, committees?: Array<{ __typename?: 'Committee', name: string, slug: string }> | null };
+
+export type ArticlesPageFragment = { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null, committees?: Array<{ __typename?: 'Committee', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } };
 
 export type GetArticlesPageQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -129,7 +175,7 @@ export type GetArticlesPageQueryVariables = Exact<{
 }>;
 
 
-export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } } | null };
+export type GetArticlesPageQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleConnection', nodes?: Array<{ __typename?: 'Article', id: string, title: string, publishedAt?: any | null, updatedAt: any, bureaus?: Array<{ __typename?: 'Bureau', name: string, slug: string }> | null, committees?: Array<{ __typename?: 'Committee', name: string, slug: string }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean, hasNextPage: boolean } } | null };
 
 export type GetBureausQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -148,6 +194,10 @@ export const ArticleListItemFragmentDoc = gql`
   id
   title
   bureaus {
+    name
+    slug
+  }
+  committees {
     name
     slug
   }
@@ -230,6 +280,21 @@ export default {
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "Bureau",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "committees",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Committee",
                   "ofType": null
                 }
               }
@@ -463,6 +528,145 @@ export default {
       },
       {
         "kind": "OBJECT",
+        "name": "Committee",
+        "fields": [
+          {
+            "name": "articles",
+            "type": {
+              "kind": "OBJECT",
+              "name": "ArticleConnection",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "before",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "last",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "bureau",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Bureau",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "createdAt",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "description",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "name",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "slug",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "special",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "updatedAt",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "PageInfo",
         "fields": [
           {
@@ -577,6 +781,41 @@ export default {
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "Bureau",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "committee",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Committee",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "slug",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "committees",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Committee",
                   "ofType": null
                 }
               }

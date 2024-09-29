@@ -18,4 +18,5 @@ export const styles = {
   }),
   description: style({ marginRight: "5px" }),
   bureau: style({ textDecoration: "none", marginRight: "5px" }),
+  committee: style({ textDecoration: "none", marginRight: "5px" }),
 }
