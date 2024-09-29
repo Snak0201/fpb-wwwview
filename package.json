@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml",
+    "prod-update-branch": "git fetch && git pull",
+    "prod-restart": "pm2 restart wwwview",
+    "release": "yarn prod-update-branch && yarn && yarn build && yarn prod-restart"
   },
   "dependencies": {
     "@urql/next": "^1.1.1",
